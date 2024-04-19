@@ -1,0 +1,104 @@
+{% load static %}
+{% load i18n %}
+{% load rest_framework %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .container {
+      margin: 20px auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Sign Up</h2>
+  <form action="http://127.0.0.1:8000/ControllerSignUp/" method="post">
+    {% csrf_token %}
+    <input name="username" type="text" id="username" placeholder="Username">
+    <input name="email" type="email" id="email" placeholder="Email">
+    <input name="password" type="password" id="password" placeholder="Password">
+    <!-- Input hidden untuk tanggal -->
+    <input name="date" type="hidden" id="date" name="date">
+    <button type="submit" onclick="submitForm()">Sign Up</button>
+  </form>
+</div>
+
+<script>
+  function submitForm() {
+    var username = document.getElementById("username").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    var date = new Date().toISOString().split('T')[0]; // Mendapatkan tanggal saat ini
+    
+    // Mengisi nilai tanggal ke dalam input hidden
+    document.getElementById("date").value = date;
+    
+    // Perform validation here (optional)
+    
+    // Perform signup process (ajax request, etc.)
+    //console.log("Username: " + username);
+    //console.log("Email: " + email);
+    //console.log("Password: " + password);
+    //console.log("Date: " + date);
+    
+    // For demonstration purposes, let's prevent form submission
+    //event.preventDefault();
+  }
+</script>
+
+</body>
+</html>
